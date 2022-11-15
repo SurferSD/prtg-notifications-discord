@@ -130,6 +130,8 @@ $body = ConvertTo-Json -Depth 6 @{
 $enc = [system.Text.Encoding]::UTF8
 $encodedBody = $enc.GetBytes($body)
 
+[Net.ServicePointManager]::SecurityProtocol = "Tls, Tls11, Tls12, Ssl3"
+
 try 
 { Invoke-RestMethod -uri $uri -Method Post -body $encodedBody -ContentType 'application/json'; exit 0; }
 Catch
